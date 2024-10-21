@@ -11,8 +11,8 @@ const Pattern = new Schema(
         bodyType: { type: String, required: true },
         fabricTypes: { type: String, required: true },
         fabricSuggestions: { type: String, required: true },
-        hashtags: { type: String, required: true },
-        releaseDate: { type: Date, required: true },
+        hashtags: { type: [String], required: true },
+        patternImg: { type: String, required: true },
         patternLink: { type: String, required: true }, 
         patternType: { type: String, required: true }
     },
