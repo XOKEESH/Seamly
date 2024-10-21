@@ -55,5 +55,14 @@ app.post('/patterns', patternController.createPattern)
 app.put('/patterns/:id', patternController.updatePattern)
 app.delete('/patterns/:id', patternController.deletePattern)
 
-
-
+//Workshop Routes
+app.get('/workshops', workshopController.getAllWorkshops)
+app.get('/workshops/:id', workshopController.getWorkshopById)
+app.get('/workshops/title/:title', workshopController.getWorkshopsByTitle)
+app.get('/workshops/date', workshopController.getWorkshopsByDate)
+app.get('/workshops/instructor/:instructor', workshopController.getWorkshopsByInstructor)
+app.get('/workshops/skillLevel/:skillLevel', workshopController.getWorkshopsBySkillLevel)
+app.get('/workshops/projectType/:projectType', workshopController.getWorkshopsByProjectType)
+app.post('/workshops', workshopController.createWorkshop)
+app.put('/workshops/:id', workshopController.updateWorkshop)
+app.delete('/workshops/:id', workshopController.deleteWorkshop)

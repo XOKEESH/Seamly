@@ -10,7 +10,7 @@ const Pattern = new Schema(
         ageGroup: { type: String, required: true },
         bodyType: { type: String, required: true },
         fabricTypes: { type: String, required: true },
-        fabricSuggestions: { type: String, required: true },
+        fabricSuggestions: { type: String, required: false },
         hashtags: { type: [String], required: true },
         patternImg: { type: String, required: true },
         patternLink: { type: String, required: true }, 
