@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('./db')
 const path = require('path')
-const fabricController = require('../controllers/fabricController')
+const fabricController = require('../controllers/fabricController.js')
 
 
 
