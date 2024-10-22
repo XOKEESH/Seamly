@@ -10,6 +10,20 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+// GET Show
+const getUsersById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findById(id)
+        if (user) {
+            return res.json(user)
+        }
+        return res.status(404).send('User with that ID not found.')
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+
 const getUserByName = async (req, res) => {
     try {
         const { username } = req.params
@@ -74,6 +88,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
     getAllUsers,
+    getUsersById,
     getUserByName,
     getUserByEmail,
     createUser,

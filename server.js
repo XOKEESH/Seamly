@@ -79,6 +79,7 @@ app.delete('/projects/:id', projectController.deleteProject)
 
 // User Routes
 app.get('/users', userController.getAllUsers)
+app.get('/users/:id', userController.getUsersById)
 app.get('/users/username/:username', userController.getUserByName)
 app.get('/users/email/:email', userController.getUserByEmail)
 app.post('/users', userController.createUser)
