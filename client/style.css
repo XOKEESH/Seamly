@@ -1,3 +1,9 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,44 +21,239 @@ header {
 header h1 {
     margin: 0;
 }
-.main-container {
-    padding: 20px;
-}
-.dashboard {
+
+.main-layout {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-grow: 1; 
 }
+
+.sidebar {
+    background-color: #0a0f26;
+    color: #ffffff;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #1f2937;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #3b82f6;
+}
+
+.main-container {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto; /* Ensures content scrolls if it exceeds the view height */
+    background-color: #f3f4f6;
+}
+
 .dashboard-section {
-    width: 32%;
-    margin-bottom: 20px;
     background-color: #fff;
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: flex; /* Enable flexbox for sections */
+    flex-direction: column;
 }
 .section-title {
     font-size: 18px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-.shortcuts, .latest-projects, .pattern-list, .latest-reviews, .trending, .discussions {
+/* Shortcuts Section */
+.shortcuts {
+    display: flex; /* Use flexbox for shortcuts */
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 10px;
+}
+
+.shortcut-item {
+    margin-bottom: 15px;
+}
+
+/* Latest Projects Section */
+.latest-projects {
+    background-color: #ffffff; /* Each project gets its own background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 15px; /* Padding inside the project card */
+    flex: 1 1 200px; /* Allow the items to grow and shrink; set a minimum width */
+    display: flex; /* Use flexbox for project items */
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 15px 0; 
+}
+
+.project-item {
+    margin-bottom: 15px;
+}
+
+/* Pattern Lists Section */
+.pattern-list {
     background-color: #ffffff;
     border-radius: 8px;
-    margin-bottom: 15px;
-    padding: 15px;
+    display: flex; /* Use flexbox for pattern items */
+    flex-direction: column; /* Stack items vertically */
+    gap: 5px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.shortcut-item, .project-item, .pattern-item, .review-item, .trending-item, .discussion-item {
+
+.pattern-item {
     margin-bottom: 15px;
 }
-footer {
+
+/* Latest Reviews Section */
+.latest-reviews {
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex; /* Use flexbox for review items */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-item {
+    margin-bottom: 15px;
+}
+
+/* Trending Section */
+.trending {
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex; /* Use flexbox for trending items */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trending-item {
+    margin-bottom: 15px;
+}
+
+/* Discussions Section */
+.discussions {
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex; /* Use flexbox for trending items */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.discussion-item {
+    margin-bottom: 15px;
+}
+
+.project-item {
+    background-color: #ffffff; /* Each project gets its own background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 15px; /* Padding inside the project card */
+    flex: 1 1 200px;
+}
+
+.image-container {
+    width: 100%;
+    height: auto;
+}
+
+.project-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+#project-title, #by-user {
+    margin: 10px 0 0 0;
     text-align: center;
-    padding: 20px;
+}
+
+.pattern-item,
+.review-item,
+.trending-item,
+.discussion-item {
+    padding: 10px;
+    background-color: #f9f9f9; /* Background for list items */
+    border-radius: 5px; /* Rounded corners for items */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+footer {
     background-color: #0a0f26;
     color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    margin-top: auto; /* pushes footer to bottom */
+    box-sizing: border-box;
 }
 a {
     color: #3b82f6;
     text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none; /* Hide the sidebar initially on smaller screens */
+    }
+
+    .main-container {
+        padding: 10px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Toggle menu for small screens */
+    header::after {
+        content: '☰';
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* Add dropdown navigation */
+    .dropdown-nav {
+        display: flex;
+        flex-direction: column;
+        background-color: #0a0f26;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+
+    .dropdown-nav a {
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #1f2937;
+    }
+
+    .dropdown-nav a:hover {
+        background-color: #3b82f6;
+    }
+
+    footer {
+        position: relative;
+        bottom: 0;
+    }
 }
