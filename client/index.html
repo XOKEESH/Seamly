@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/client/style.css">
+    <title>Seamly</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="/client/script.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Seamly</h1>
+    <nav>
+        <a href="#">Home</a> | 
+        <a href="#">Browse Patterns</a> | 
+        <a href="#">Workshops</a> | 
+        <a href="#">Community</a>
+    </nav>
+</header>
+
+<div class="main-container">
+
+    <!-- Shortcuts Section -->
+    <div class="shortcuts dashboard-section">
+        <!-- <div class="section-title">Shortcuts</div> -->
+        <button id="shortcut-button">Create a Project</button>
+        <button id="shortcut-button">Add Fabric to Stash</button>
+        <button id="shortcut-button">Browse Patterns</button>
+        <button id="shortcut-button">Browse Workshops</button>
+    </div>
+
+    <!-- Latest Shared Projects Section -->
+    <div class="latest-projects dashboard-section">
+        <div class="section-title">Latest Shared Projects</div>
+            <div class="project-item">
+                <div class="image-container">
+                    <img src="client/images/Project1Img.jpg" width="100%">
+                    <span class="project-status"></span>
+                </div>
+                <p id="project-title"></p>
+                <p id="by-user">by </p>
+            </div>
+            <div class="project-item"></div>
+                <div class="image-container">
+                    <img src="" width="100%">
+                    <span class="project-status"></span>
+                </div>
+                <p id="project-title"></p>
+                <p id="by-user">by </p>
+            </div>
+            <div class="project-item"></div>
+                <div class="image-container">
+                    <img src="" width="100%">
+                    <span class="project-status"></span>
+                </div>
+                <p id="project-title"></p>
+                <p id="by-user">by </p>
+            </div>
+            <div class="project-item"></div>
+                <div class="image-container">
+                    <img src="" width="100%">
+                    <span class="project-status"></span>
+                </div>
+                <p id="project-title"></p>
+                <p id="by-user">by </p>
+            </div>
+    </div>
+        
+
+    <!-- Latest Pattern Lists Section -->
+    <div class="pattern-list dashboard-section">
+        <div class="section-title">Latest Pattern Lists</div>
+        <div class="pattern-item">Last Minute Halloween Costume Ideas by SallyPants</div>
+        <div class="pattern-item">Wardrobe Staples by FullHands</div>
+    </div>
+
+    <!-- Latest Reviews Section -->
+    <div class="latest-reviews dashboard-section">
+        <div class="section-title">Latest Reviews</div>
+        <div class="review-item">
+            <p><strong>Bardon Dress</strong> by ouro</p>
+            <p>⭐⭐⭐⭐⭐ An endlessly hackable wardrobe staple...</p>
+        </div>
+        <div class="review-item">
+            <p><strong>Atlas Wrap Dress</strong> by Thread and Doe</p>
+            <p>⭐⭐⭐⭐ Stylish, trendy, and comfortable...</p>
+        </div>
+    </div>
+
+    <!-- Trending Section -->
+    <div class="trending dashboard-section">
+        <div class="section-title">Trending</div>
+        <div class="trending-item">On Deck Popover by Matchy Matchy Sewing Club</div>
+        <div class="trending-item">Phoebe Dress by Sewist Studio</div>
+    </div>
+
+    <!-- Discussions Section -->
+    <div class="discussions dashboard-section">
+        <div class="section-title">Discussions</div>
+        <div class="discussion-item">Database Entry Questions, Tips, Best Practices by made.leine</div>
+        <div class="discussion-item">Pattern Help by Threadloop</div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2024 Seamly | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+</body>
+</html>
