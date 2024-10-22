@@ -3,8 +3,9 @@ const db = require('./db')
 const path = require('path')
 const fabricController = require('../controllers/fabricController.js')
 const patternController = require('../controllers/patternController.js')
-
-
+const workshopController = require('../conrollers/workshopController.js')
+const projectController = require('../controllers/projectController.js')
+const userController = require('../controllers/fabricController.js')
 
 const bodyParser = require('body-parser')
 const logger = require('morgan')
@@ -55,7 +56,7 @@ app.post('/patterns', patternController.createPattern)
 app.put('/patterns/:id', patternController.updatePattern)
 app.delete('/patterns/:id', patternController.deletePattern)
 
-//Workshop Routes
+// Workshop Routes
 app.get('/workshops', workshopController.getAllWorkshops)
 app.get('/workshops/:id', workshopController.getWorkshopById)
 app.get('/workshops/title/:title', workshopController.getWorkshopsByTitle)
@@ -66,3 +67,19 @@ app.get('/workshops/projectType/:projectType', workshopController.getWorkshopsBy
 app.post('/workshops', workshopController.createWorkshop)
 app.put('/workshops/:id', workshopController.updateWorkshop)
 app.delete('/workshops/:id', workshopController.deleteWorkshop)
+
+// Project Routes
+app.get('/projects', projectController.getAllProjects)
+app.get('/projects/:id', projectController.getProjectsById)
+app.get('/projects/user/:userId', projectController.getProjectsByUser)
+app.get('/projects/pattern/:patternId', projectController.getProjectsByPattern)
+app.post('/projects', projectController.createProject)
+app.put('/projects/:id', projectController.updateProject)
+app.delete('/projects/:id', projectController.deleteProject)
+
+// User Routes
+app.get('/users/username/:username', userController.getUserByName)
+app.get('/users/email/:email', userController.getUserByEmail)
+app.post('/users', userController.createUser)
+app.put('/users/:id', userController.updateUser)
+app.delete('/users/:id', userController.deleteUser)

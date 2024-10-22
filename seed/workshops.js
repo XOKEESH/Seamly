@@ -43,7 +43,7 @@ const main = async () => {
             time: `9-12pm`,
             ageGroup: `Adult`,
             instructor: `Kisha`,
-            projectType: null
+            projectType: `Alterations`
         }
     ]
 
