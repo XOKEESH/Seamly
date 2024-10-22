@@ -115,7 +115,40 @@ const main = async () => {
             stretch: true,
             sheerness: "Sheer",
             description: "Pearled mesh fabric. Textural and provides a drape similar to that of a soft tulle. With a surprising amount of give in the weft, this couture material is easy to work with when trying to create fitted and tailored garments."
-        }
+        },
+        {
+            fabricName: "Silk Duchesse Satin",
+            imageURL: 'https://www.moodfabrics.com/media/catalog/product/cache/94aa306f46bfa14a0eb90dabf19c296e/P/V/PV9500-1.jpg',
+            type: "Woven",
+            colors: "White",
+            quantityInYds: 12,
+            print: "Solid",
+            stretch: false,
+            sheerness: "Opaque",
+            description: "Understated sheen, medium weight and firm hand make for elegant special occasion wear."
+        },
+        {
+            fabricName: "Organic Egyptian Cotton",
+            imageURL: 'https://www.moodfabrics.com/media/catalog/product/cache/94aa306f46bfa14a0eb90dabf19c296e/3/3/330229.jpg',
+            type: "Woven",
+            colors: "Purple, Lavender",
+            quantityInYds: 6,
+            print: "Solid",
+            stretch: false,
+            sheerness: "Opaque",
+            description: "Thin and lightweight, lavender Egyptian cotton that has a crisp, cool hand and a stiff but flexible drape. Perfect for shirting."
+        },
+        {
+            fabricName: "Heathered Lightweight Denim",
+            imageURL: 'https://www.moodfabrics.com/media/catalog/product/cache/94aa306f46bfa14a0eb90dabf19c296e/1/3/134062.jpg',
+            type: "Woven",
+            colors: "Blue",
+            quantityInYds: 5,
+            print: "Solid",
+            stretch: true,
+            sheerness: "Opaque",
+            description: "100% hemp woven. Thin, lightweight 6oz. Perfect for comfortable shirts, tops, shirt dresses."
+        }        
     ]
 
     await Fabric.insertMany(fabrics)

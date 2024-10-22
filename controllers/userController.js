@@ -1,5 +1,15 @@
 const { User } = require('../models')
 
+// GET Index
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find()
+        res.json(users)
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+
 const getUserByName = async (req, res) => {
     try {
         const { username } = req.params
@@ -63,6 +73,7 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
+    getAllUsers,
     getUserByName,
     getUserByEmail,
     createUser,
