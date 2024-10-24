@@ -321,210 +321,164 @@ select {
 /* Project Detail Container */
 .project-detail-container {
     display: none;
-    /*  position: fixed; 
-    top: 15px;
-    left: 250px;
-    right: 0; 
-    bottom: 50px;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    z-index: 20;
-    overflow-y: auto;
+}
+
+/* Project Detail Content */
+.project-detail-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px; /* Space between sections */
+    top: 15px; /* Offset from top */
+    left: 250px; /* Offset from left (considering sidebar) */
+    right: 20px; /* Space on the right */
+    bottom: 50px; /* Offset from bottom */
     padding: 20px;
-    width: calc(100% - 250px - 40px);
-    max-width: 600px;
+    background-color: #ffffff; /* Background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    z-index: 20; /* Layering */
+    overflow-y: auto; /* Scroll if needed */
+    max-width: 900px; /* Max width */
     margin: 0 auto;
     min-height: 95vh;
-    display: flex;
-    flex-direction: column; */
-
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    width: calc(100% - 250px);
-    min-height: 95vh;
-    overflow-y: auto;
-    top: 15px;
-    left: 250px;
-    right: 0; 
-    bottom: 50px;
 }
 
-.project-detail-content {
-    display: flex; /* Flex for the content area */
-    flex-direction: row;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    /* left: 650px; */
-    overflow: auto;
-}
-
+/* Image Container */
 .project-image-container {
-    flex: 1;
-    max-width: 40%; /* Restrict the image container to 40% of the width */
-    display: flex;
-    align-items: center; /* Center the image vertically */
-    justify-content: center;
+    /* max-width: 600px; */
+    display: flex; /* Flex for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
 }
 
 .project-image-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+    max-width: 100%; /* Full width of container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Text Content */
 .project-text-content {
-    flex: 2; /* Text takes up more space */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex: 1; /* Allow text content to grow */
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Vertical layout */
 }
 
 .project-text-content h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px; /* Title size */
+    color: #333; /* Dark text color */
+    font-weight: 600;
+    margin-bottom: 10px; /* Space below title */
 }
 
 .project-text-content p {
-    margin: 5px 0;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #666; /* Subtle text color */
+    line-height: 1.6;
 }
 
-#projectDetailContainer h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: #555;
+/* Section Headings */
+h3 {
+    margin: 20px 0 10px; /* Space around h3 */
+    font-size: 20px; /* Heading size */
+    color: #555; /* Color */
 }
 
-#projectDetailContainer h2 {
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #333;
-}
-
-#projectDetailContainer p {
-    margin-bottom: 0 0 15px;
-    line-height: 1.5;
-    color: #444;
-}
-
-#detail-images img {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 100%;
-}
-
-#closeDetailsButton {
-    background-color: #f5f5f5; 
-    border: 1px dashed #646464; 
-    border-radius: 5px; 
-    padding: 10px 20px;
-    cursor: pointer; 
-    margin-top: 20px;
-}
-
-/* Liked By Section */
-.liked-by-section {
-    /* margin-top: 20px; Space above the liked by section */
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-/* Comments Section */
-.comments-section {
-    /* margin-top: 20px; */
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-#likedByContainer, 
-#commentsContainer {
-    margin-top: 10px; /* Space above these sections */
-    padding: 10px; /* Add padding for better spacing */
-    border: 1px solid #e1e1e1; /* Optional: light border for sections */
-    border-radius: 5px; /* Optional: rounded corners */
-    background-color: #f9f9f9; /* Optional: light background */
-}
-
-#likedByContainer, #commentsContainer {
-    margin-top: 20px; /* Add space above */
-}
-
+/* Common Section Styles */ 
 .new-comment-section {
-    display: flex; /* Flex layout for input and button */
-    margin-top: 10px; /* Space above the new comment section */
+    background-color: #f9f9f9; /* Light background */
+    padding: 15px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below */
+}
+
+.liked-by-section {
+    margin-top: 20px;
+    background-color: #f9f9f9; /* Light background */
+    padding: 15px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+  }
+
+  .liked-by-section h3 {
+    font-size: 18px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  #likedByContainer {
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-}
+  }
+  
+  #likedByContainer div {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #555;
+  }
 
-.new-comment-section input {
-    flex: 1;
+  .comments-section {
+    margin-top: 20px;
+  }
+
+  .comments-section h3 {
+    font-size: 18px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  #commentsContainer {
+    background-color: #fafafa;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
 
-.new-comment-section button {
-    padding: 10px 20px;
-    background-color: #0a0f26;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* Input and Button Styles */
+.new-comment-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+    margin-top: 20px;
 }
 
 #newCommentInput {
-    flex: 1; /* Input takes up available space */
-    padding: 10px; /* Padding */
-    border: 1px solid #ccc; /* Border */
-    border-radius: 5px; /* Rounded corners */
-    margin-right: 10px; /* Space between input and button */
+    flex: 1; /* Input takes available space */
+    padding: 10px 60px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ddd; /* Border */
+    font-size: 14px;
 }
 
-.comment {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.comment img {
-    margin-right: 10px; /* Space between image and text */
-}
-
-.comment p {
-    margin: 0; /* Reset default margin */
-}
-
-#submitCommentButton {
-    background-color: #3b82f6; /* Primary button color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px; /* Padding */
-    cursor: pointer; 
-}
-
-#closeDetailsButton {
+#submitCommentButton, #closeDetailsButton {
     padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: #ece8e8;
+    color: black;
+    border: 1px dashed #646464;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 20px;
-    align-self: flex-end; /* Align the button to the right */
-}
+    flex: 1;
+    min-width: 120px;
+  }
 
+  #closeDetailsButton {
+    background-color: #ff6b6b;
+    color: white;
+  }
+
+  .PDbutton-container {
+    display: flex;
+    gap: 10px;
+  }
+ 
 /* Footer */
 footer {
     background-color: #0a0f26;
@@ -534,7 +488,7 @@ footer {
     width: 100%;
     margin-top: auto;
     box-sizing: border-box;
-    /* position: absolute; */
+    position: absolute;
 }
 
 a {
