@@ -6,9 +6,10 @@ html, body {
 }
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f3f4f6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 header {
     background-color: #0a0f26;
@@ -22,11 +23,6 @@ header h1 {
     margin: 0;
 }
 
-.main-layout {
-    display: flex;
-    flex-grow: 1; 
-}
-
 .sidebar {
     background-color: #0a0f26;
     color: #ffffff;
@@ -35,8 +31,12 @@ header h1 {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    height: 100vh;
+    height: 100vh;    
     box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
 }
 
 .sidebar a {
@@ -44,40 +44,49 @@ header h1 {
     text-decoration: none;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #1f2937;
     border-radius: 5px;
-}
-
-.sidebar a:hover {
-    background-color: #3b82f6;
 }
 
 .main-container {
     flex-grow: 1;
     padding: 20px;
-    overflow: auto; /* Ensures content scrolls if it exceeds the view height */
+    overflow: auto;
     background-color: #f3f4f6;
+    margin-left: 250px;
+    position: relative;
+}
+
+.greeting-section {
+    padding-left: 2px;
 }
 
 .dashboard-section {
-    background-color: #fff;
-    border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: 20px;
-    display: flex; /* Enable flexbox for sections */
-    flex-direction: column;
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
+
 .section-title {
     font-size: 18px;
     margin-bottom: 10px;
     font-weight: bold;
+    display: block;
 }
-/* Shortcuts Section */
-.shortcuts {
-    display: flex; /* Use flexbox for shortcuts */
-    flex-wrap: wrap; /* Allow buttons to wrap */
-    gap: 10px;
+
+#shortcut-button {
+    background-color: #f5f5f5;
+    border: 1px dashed #646464;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#createProjectButton {
+    background-color: #f5f5f5;
+    border: 1px dashed #646464;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .shortcut-item {
@@ -86,41 +95,133 @@ header h1 {
 
 /* Latest Projects Section */
 .latest-projects {
-    background-color: #ffffff; /* Each project gets its own background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    padding: 15px; /* Padding inside the project card */
-    flex: 1 1 200px; /* Allow the items to grow and shrink; set a minimum width */
-    display: flex; /* Use flexbox for project items */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.project-item-container {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
-    margin: 15px 0; 
+    gap: 20px;
 }
 
 .project-item {
     margin-bottom: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    flex: 1 1 200px;
+}
+
+.image-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.project-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card-copy {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.status-span-complete {
+    position: absolute;      
+    top: 10px;
+    right: 10px;
+    background-color: rgba(150, 94, 213, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.status-span-inprogress {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(203, 94, 213, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 
 /* Pattern Lists Section */
+.pattern-list-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .pattern-list {
     background-color: #ffffff;
     border-radius: 8px;
-    display: flex; /* Use flexbox for pattern items */
-    flex-direction: column; /* Stack items vertically */
-    gap: 5px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .pattern-item {
     margin-bottom: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    flex: 1 1 200px;
+}
+
+.pattern-image-container {
+    width: 100%;
+    height: auto;
+}
+
+.pattern-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* User Profile in Pattern Item */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 10px;
+}
+
+.profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 /* Latest Reviews Section */
 .latest-reviews {
     background-color: #ffffff;
     border-radius: 8px;
-    display: flex; /* Use flexbox for review items */
-    flex-direction: column; /* Stack items vertically */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -133,8 +234,8 @@ header h1 {
 .trending {
     background-color: #ffffff;
     border-radius: 8px;
-    display: flex; /* Use flexbox for trending items */
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -147,8 +248,9 @@ header h1 {
 .discussions {
     background-color: #ffffff;
     border-radius: 8px;
-    display: flex; /* Use flexbox for trending items */
-    flex-direction: column; /* Stack items vertically */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -157,37 +259,62 @@ header h1 {
     margin-bottom: 15px;
 }
 
-.project-item {
-    background-color: #ffffff; /* Each project gets its own background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    padding: 15px; /* Padding inside the project card */
-    flex: 1 1 200px;
+/* Create Project Form */
+.create-project-form {
+    display: none;
+    position: static;
+    top: 15px;
+    left: 250px;
+    right: 0;
+    bottom: 50px;
+    background-color: #f3f4f6;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    overflow-y: auto;
+    padding: 20px;
+    width: calc(100% - 40px); 
+    max-width: 600px; /* Set a max width for larger screens */
+    margin: 0 auto; /* Center the form on the screen */
+    min-height: 95vh;
 }
 
-.image-container {
-    width: 100%;
-    height: auto;
+.create-project-form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Make form full width */
 }
 
-.project-item img {
-    max-width: 100%;
-    height: auto;
+.create-project-form input,
+select {
+    margin-bottom: 15px;
+    padding: 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px dashed #646464;
 }
 
-#project-title, #by-user {
-    margin: 10px 0 0 0;
-    text-align: center;
+.CPbutton-group {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px;
+    margin-bottom: 20px; /* Add some space below the button group */
 }
 
-.pattern-item,
-.review-item,
-.trending-item,
-.discussion-item {
-    padding: 10px;
-    background-color: #f9f9f9; /* Background for list items */
-    border-radius: 5px; /* Rounded corners for items */
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+.CPbutton {
+    background-color: #f5f5f5; 
+    border: 1px dashed #646464; 
+    border-radius: 5px; 
+    padding: 10px 20px; /* Adjusted padding */
+    cursor: pointer; 
+    flex: 1; /* Allow buttons to grow and fill the space equally */
+    min-width: 120px; /* Set a minimum width for buttons */
+}
+
+#cancelButton {
+    background-color: #dc3545; 
+    color: white; 
 }
 
 footer {
@@ -196,12 +323,41 @@ footer {
     text-align: center;
     padding: 20px;
     width: 100%;
-    margin-top: auto; /* pushes footer to bottom */
+    margin-top: auto;
     box-sizing: border-box;
+    position: absolute;
 }
+
 a {
     color: #3b82f6;
     text-decoration: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1300px) {
+    .project-item-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+    }
+
+    .project-item {
+        flex: 0 0 250px;
+        min-width: 250px;
+    }
+
+    .pattern-list-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+    }
+
+    .pattern-item {
+        flex: 0 0 250px;
+        min-width: 250px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -210,46 +366,17 @@ a {
     }
 
     .sidebar {
-        display: none; /* Hide the sidebar initially on smaller screens */
+        display: none;
     }
 
     .main-container {
         padding: 10px;
+        margin-left: 0px;
     }
 
     header {
         display: flex;
         justify-content: space-between;
-    }
-
-    /* Toggle menu for small screens */
-    header::after {
-        content: '☰';
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    /* Add dropdown navigation */
-    .dropdown-nav {
-        display: flex;
-        flex-direction: column;
-        background-color: #0a0f26;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        right: 0;
-        z-index: 100;
-    }
-
-    .dropdown-nav a {
-        color: #fff;
-        padding: 10px;
-        text-align: center;
-        border-bottom: 1px solid #1f2937;
-    }
-
-    .dropdown-nav a:hover {
-        background-color: #3b82f6;
     }
 
     footer {

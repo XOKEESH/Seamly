@@ -11,25 +11,32 @@
 <body>
 
     <header>
-        <h1>Seamly</h1>
+        <h1></h1>
     </header>
     
     <div class="main-layout">
     
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
-            <a href="#">Home</a>
-            <a href="#">Browse Patterns</a>
+            <h1>Seamly</h1>
+            <a href="#">Projects</a>
+            <a href="#">Fabrics</a>
+            <a href="#">Patterns</a>
             <a href="#">Workshops</a>
-            <a href="#">Community</a>
+            <a href="#">My Lists</a>
+            <a href="#">Measurements</a>
         </nav>
 
 <div class="main-container">
 
+    <!-- Greeting Section -->
+    <div class="greeting-section">
+        <h2>Good Morning, Ashley!</h2>
+    </div>
+
     <!-- Shortcuts Section -->
-    <div class="shortcuts dashboard-section">
-        <!-- <div class="section-title">Shortcuts</div> -->
-        <button id="shortcut-button">Create a Project</button>
+    <div class="dashboard-section">
+        <button id="createProjectButton">Create a Project</button>
         <button id="shortcut-button">Add Fabric to Stash</button>
         <button id="shortcut-button">Browse Patterns</button>
         <button id="shortcut-button">Browse Workshops</button>
@@ -37,46 +44,101 @@
 
     <!-- Latest Shared Projects Section -->
     <div class="latest-projects dashboard-section">
-        <div class="section-title">Latest Shared Projects</div>
-        
-        <div class="project-item">
-            <div class="image-container">
-                <img src="/client/images/Project1Img.jpg" width="100%">
-                <span>Completed</span></div>
-                    <p id="project-title">Project Title 1</p>
-                    <p id="by-user">by User 1</p>
-            </div>
-        <div class="project-item">
+    <div class="section-title">Latest Shared Projects</div>
+        <div class="project-item-container">
+            <div class="project-item">
                 <div class="image-container">
-                    <img src="/client/images/Project1Img.jpg" width="100%">
-                    <span>Completed</span></div>
-                        <p id="project-title">Project Title 1</p>
-                        <p id="by-user">by User 1</p>
-                </div>
-                <div class="project-item">
-                    <div class="image-container">
-                        <img src="/client/images/Project1Img.jpg" width="100%">
-                        <span>Completed</span></div>
-                            <p id="project-title">Project Title 1</p>
-                            <p id="by-user">by User 1</p>
+                <img src="/client/images/Project1Img.jpg" width="100%">
+                <span class="status-span-complete">Completed</span></div>
+                <div class="card-copy">
+                <h3 id="project-title">A New Dress</h3>
+                <div class="user-info">
+                    <img src="/client/images/Lane.png" class="profile-picture">
+                    <span class="username">LaneTheMaker</span>    
                     </div>
-                    <div class="project-item">
-                        <div class="image-container">
-                            <img src="/client/images/Project1Img.jpg" width="100%">
-                            <span>Completed</span></div>
-                                <p id="project-title">Project Title 1</p>
-                                <p id="by-user">by User 1</p>
+                    </div>
+            </div>
+            <div class="project-item">
+                <div class="image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%">
+                <span class="status-span-complete">Completed</span></div>
+                <div class="card-copy">
+                    <h3 id="project-title">Dress for Homecoming</h3>
+                    <div class="user-info">
+                        <img src="/client/images/Lane.png" class="profile-picture">
+                        <span class="username">LaneTheMaker</span>    
                         </div>
+                        </div>
+            </div>
+            <div class="project-item">
+                <div class="image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%">
+                <span class="status-span-inprogress">In Progress</span></div>
+                <div class="card-copy">
+                    <h3 id="project-title">Last Minute Costume</h3>
+                    <div class="user-info">
+                        <img src="/client/images/Mike.png" class="profile-picture">
+                        <span class="username">MikeDTheSewingGuy</span>    
+                        </div>
+                        </div>
+            </div>
+            <div class="project-item">
+                <div class="image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%">
+                <span class="status-span-complete">Completed</span></div>
+                <div class="card-copy">
+                    <h3 id="project-title">My new Favorite Dress!</h3>
+                    <div class="user-info">
+                        <img src="/client/images/Mike.png" class="profile-picture">
+                        <span class="username">MikeDTheSewingGuy</span>    
+                        </div>
+                        </div>
+            </div>
+        </div>
     </div>
         
-        
-
     <!-- Latest Pattern Lists Section -->
     <div class="pattern-list dashboard-section">
-        <div class="section-title">Latest Pattern Lists</div>
-        <div class="pattern-item">Last Minute Halloween Costume Ideas by SallyPants</div>
-        <div class="pattern-item">Wardrobe Staples by FullHands</div>
-    </div>
+    <div class="section-title">Latest Pattern Lists</div>
+        <div class="pattern-list-container">
+            <div class="pattern-item">
+                <div class="pattern-image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%"></div>
+                <h3 class="list-title">Last Minute Halloween Costume Ideas</h3>
+                <div class="user-info">
+                <img src="/client/images/Lane.png" class="profile-picture">
+                <span class="username">LaneTheMaker</span>    
+                </div>
+            </div>  
+            <div class="pattern-item">
+                <div class="pattern-image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%"></div>
+                <h3 class="list-title">Wardrobe Staples</h3>
+                <div class="user-info">
+                <img src="/client/images/Mike.png" class="profile-picture">
+                <span class="username">MikeDTheSewingGuy</span>    
+                </div>
+            </div>
+            <div class="pattern-item">
+                <div class="pattern-image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%"></div>
+                <h3 class="list-title">Last Minute Halloween Costume Ideas</h3>
+                <div class="user-info">
+                <img src="/client/images/Lane.png" class="profile-picture">
+                <span class="username">LaneTheMaker</span>    
+                </div>
+            </div>  
+            <div class="pattern-item">
+                <div class="pattern-image-container">
+                <img src="/client/images/Project1Img.jpg" width="100%"></div>
+                <h3 class="list-title">Wardrobe Staples</h3>
+                <div class="user-info">
+                <img src="/client/images/Mike.png" class="profile-picture">
+                <span class="username">MikeDTheSewingGuy</span>    
+                </div>
+            </div>    
+        </div>   
+     </div>
 
     <!-- Latest Reviews Section -->
     <div class="latest-reviews dashboard-section">
@@ -105,6 +167,37 @@
         <div class="discussion-item">Pattern Help by Threadloop</div>
     </div>
 
+</div>
+
+<div class="create-project-form" id="createProjectDiv" style="display: none">
+    <form id="projectForm">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" name="projectName" placeholder="Ex. Oversized Tee" required>
+
+        <label for="projectType">Project Type:</label>
+        <input type="text" id="projectType" name="projectType" placeholder="What are you making?" required>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="idea">Idea</option>
+            <option value="inProgress">In Progress</option>
+            <option value="completed">Completed</option>
+        </select>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" name="deadline">
+
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" name="tags" placeholder="Ex. #Summer #WorkWardrobe" required>
+
+        <div class="CPbutton-group">
+            <button id="CPsubmitButton" class="CPbutton">Create Project</button>
+            <button id="cancelButton" class="CPbutton">Cancel Project</button> 
+        </div>
+    </form>
 </div>
 
 <footer>
