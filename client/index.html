@@ -46,7 +46,7 @@
     <div class="latest-projects dashboard-section">
     <div class="section-title">Latest Shared Projects</div>
         <div class="project-item-container">
-            <div class="project-item">
+            <div class="project-item" data-project-id="1">
                 <div class="image-container">
                 <img src="/client/images/Project1Img.jpg" width="100%">
                 <span class="status-span-complete">Completed</span></div>
@@ -58,7 +58,7 @@
                     </div>
                     </div>
             </div>
-            <div class="project-item">
+            <div class="project-item" data-project-id="1">
                 <div class="image-container">
                 <img src="/client/images/Project1Img.jpg" width="100%">
                 <span class="status-span-complete">Completed</span></div>
@@ -70,7 +70,7 @@
                         </div>
                         </div>
             </div>
-            <div class="project-item">
+            <div class="project-item" data-project-id="1">
                 <div class="image-container">
                 <img src="/client/images/Project1Img.jpg" width="100%">
                 <span class="status-span-inprogress">In Progress</span></div>
@@ -82,7 +82,7 @@
                         </div>
                         </div>
             </div>
-            <div class="project-item">
+            <div class="project-item" data-project-id="1">
                 <div class="image-container">
                 <img src="/client/images/Project1Img.jpg" width="100%">
                 <span class="status-span-complete">Completed</span></div>
@@ -169,6 +169,7 @@
 
 </div>
 
+<!-- Create Project Form (Hidden) -->
 <div class="create-project-form" id="createProjectDiv" style="display: none">
     <form id="projectForm">
         <label for="projectName">Project Name:</label>
@@ -198,6 +199,24 @@
             <button id="cancelButton" class="CPbutton">Cancel Project</button> 
         </div>
     </form>
+</div>
+
+<!-- Project Detail Container (Hidden) -->
+<div id="projectDetailContainer" class="latest-project-detail-hidden">
+    <h2 id="detail-title"></h2>
+    <p id="detail-description"></p>
+    <p id="detail-status"></p>
+    <p id="detail-type"></p>
+    <p id="detail-date-created"></p>
+    <p id="detail-finish-date"></p>
+    
+    <div id="detail-images"></div>
+
+    <h3>Liked By:</h3>
+    <div id="likedByContainer"></div>
+
+    <h3>Comments:</h3>
+    <div id="commentsContainer"></div>
 </div>
 
 <footer>

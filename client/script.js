@@ -1,13 +1,13 @@
 document.getElementById('createProjectButton').addEventListener('click', function() {
-    document.querySelector('.main-container').style.display = 'none' // Hide the main content
-    document.getElementById('createProjectDiv').style.display = 'flex' // Show the create project form
-    document.querySelector('footer').style.display = 'block' // Ensure footer stays visible
-    document.querySelector('.sidebar').style.display = 'flex' // Ensure sidebar stays visible
+    document.querySelector('.main-container').style.display = 'none' 
+    document.getElementById('createProjectDiv').style.display = 'flex' 
+    document.querySelector('footer').style.display = 'block' 
+    document.querySelector('.sidebar').style.display = 'flex' 
 })
 
 document.getElementById('cancelButton').addEventListener('click', function() {
-    document.querySelector('.main-container').style.display = 'block' // Show the main content again
-    document.getElementById('createProjectDiv').style.display = 'none' // Hide the form
+    document.querySelector('.main-container').style.display = 'block' 
+    document.getElementById('createProjectDiv').style.display = 'none' 
 })
 
 async function fetchProjects() {
@@ -17,7 +17,7 @@ async function fetchProjects() {
             throw new Error('Network response was not ok')
         }
         const projects = await response.json()
-        console.log('Fetched Projects:', projects) // Debugging log
+        console.log('Fetched Projects:', projects) 
         renderProjects(projects)
     } catch (error) {
         console.error('Error fetching projects:', error)
@@ -30,44 +30,105 @@ function renderProjects(projects) {
     projects.forEach((project, index) => {
         if (projectItems[index]) {
             const projectItem = projectItems[index]
+            projectItem.dataset.projectId = project._id 
+
             const imageContainer = projectItem.querySelector('.image-container')
             const cardCopy = projectItem.querySelector('.card-copy')
 
-            // Update the image source
             const imgElement = imageContainer.querySelector('img')
-            if (project.images && project.images.length > 0) {
-                imgElement.src = project.images[0] // Use the first image
-            } else {
-                imgElement.src = '/path/to/default/image.jpg' // Fallback
-            }
+            imgElement.src = project.images && project.images.length > 0 ? project.images[0] : '/path/to/default/image.jpg'
 
-            // Update the status span
             const statusSpan = imageContainer.querySelector('span')
             if (statusSpan) {
                 const statusClass = `status-span-${project.status.replace(' ', '-').toLowerCase()}`
                 statusSpan.className = statusClass
             }
 
-            // Update project title and username
             const titleElement = cardCopy.querySelector('.project-title')
+            titleElement.textContent = project.title
+
             const usernameElement = cardCopy.querySelector('.username')
+            usernameElement.textContent = project.userId 
 
-            if (titleElement) {
-                titleElement.textContent = project.title // Set title
-            } else {
-                console.warn(`No title element found for project at index: ${index}`)
-            }
-
-            if (usernameElement) {
-                usernameElement.textContent = project.userId // Update username appropriately
-            } else {
-                console.warn(`No username element found for project at index: ${index}`)
-            }
-        } else {
-            console.warn(`No project item found for index: ${index}`)
+            projectItem.addEventListener('click', () => {
+                fetchProjectDetails(project._id)
+            })
         }
     })
 }
 
-// Call fetchProjects on page load or when appropriate
+async function fetchProjectDetails(projectId) {
+    try {
+        const response = await fetch(`http://localhost:3001/projects/${projectId}`)
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        const project = await response.json()
+        console.log('Fetched Project:', project)
+        displayProjectDetails(project)
+    } catch (error) {
+        console.error('Error fetching project details:', error)
+    }
+}
+
+function displayProjectDetails(project) {
+    console.log('Displaying project details:', project)
+
+    document.getElementById('detail-title').textContent = project.title
+    document.getElementById('detail-description').textContent = project.description
+    document.getElementById('detail-status').textContent = `Status: ${project.status}`
+    document.getElementById('detail-type').textContent = `Type: ${project.projectType}`
+    document.getElementById('detail-date-created').textContent = `Created on: ${new Date(project.dateCreated).toLocaleDateString()}`
+    document.getElementById('detail-finish-date').textContent = project.finishDate ? `Finish Date: ${new Date(project.finishDate).toLocaleDateString()}` : 'Finish Date: Not specified'
+
+    const detailImages = document.getElementById('detail-images')
+    detailImages.innerHTML = '' 
+    project.images.forEach(img => {
+        const imgElement = document.createElement('img')
+        imgElement.src = img
+        imgElement.style.width = '100%' 
+        detailImages.appendChild(imgElement)
+    })
+
+    fetchLikedBy(project.likedBy)
+    fetchComments(project.comments)
+
+    // Show the detail container
+    const detailContainer = document.getElementById('projectDetailContainer')
+    detailContainer.classList.remove('latest-project-detail-hidden') // Ensure this removes the hidden class
+    detailContainer.classList.add('visible') // If using a visibility class
+    console.log('Detail container should now be visible:', detailContainer) // Add this line
+}
+
+async function fetchLikedBy(userIds) {
+    const likedByContainer = document.getElementById('likedByContainer')
+    likedByContainer.innerHTML = ''
+    
+    for (const userId of userIds) {
+        try {
+            const response = await fetch(`http://localhost:3001/users/${userId}`)
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const user = await response.json()
+            const userElement = document.createElement('div')
+            userElement.textContent = user.username
+            likedByContainer.appendChild(userElement)
+        } catch (error) {
+            console.error('Error fetching liked by user:', error)
+        }
+    }
+}
+
+function fetchComments(comments) {
+    const commentsContainer = document.getElementById('commentsContainer')
+    commentsContainer.innerHTML = ''
+
+    comments.forEach(comment => {
+        const commentElement = document.createElement('div')
+        commentElement.textContent = comment.comment 
+        commentsContainer.appendChild(commentElement)
+    })
+}
+
 document.addEventListener('DOMContentLoaded', fetchProjects)

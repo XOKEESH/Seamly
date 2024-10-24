@@ -332,6 +332,10 @@ a {
     color: #3b82f6;
     text-decoration: none;
 }
+/* Latest Project Detail Hidden Container*/
+.latest-project-detail-hidden {
+    display: none;
+}
 
 /* Media Queries */
 @media screen and (max-width: 1300px) {
