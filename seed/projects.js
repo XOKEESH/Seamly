@@ -19,8 +19,8 @@ const projects = [
         likes: 3,
         likedBy: ['6717bf00fb2edc9df769974b', '6717bf00fb2edc9df769974e', '6717bf00fb2edc9df769974c'],
         images: [
-            'client/images/Project2Img.webp',
-            'client/images/Project1Img.jpg'
+            '/client/images/Project2Img.webp',
+            '/client/images/Project1Img.jpg'
         ],
         comments: [
             {
@@ -76,9 +76,9 @@ const projects = [
         likes: 4,
         likedBy: ['6717bf00fb2edc9df769974e','6717bf00fb2edc9df769974a', '6717bf00fb2edc9df769974c', '6717bf00fb2edc9df769974d'],
         images: [
-            'client/images/Ireneboy1.jpg',
-            'client/images/Ireneboy2.jpg',
-            'client/images/Ireneboy3.jpg'
+            '/client/images/Ireneboy1.jpg',
+            '/client/images/Ireneboy2.jpg',
+            '/client/images/Ireneboy3.jpg'
         ],
         comments: [
             {
