@@ -1,3 +1,4 @@
+// document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('createProjectButton').addEventListener('click', function() {
     document.querySelector('.main-container').style.display = 'none' 
     document.getElementById('createProjectDiv').style.display = 'flex' 
@@ -95,9 +96,10 @@ function displayProjectDetails(project) {
 
     // Show the detail container
     const detailContainer = document.getElementById('projectDetailContainer')
-    detailContainer.classList.remove('latest-project-detail-hidden') // Ensure this removes the hidden class
-    detailContainer.classList.add('visible') // If using a visibility class
-    console.log('Detail container should now be visible:', detailContainer) // Add this line
+    detailContainer.style.display = 'flex' // Change this line
+    document.querySelector('.main-container').style.display = 'none' // Hide main content
+    document.querySelector('footer').style.display = 'block' // Show footer
+    document.querySelector('.sidebar').style.display = 'flex' // Show sidebar
 }
 
 async function fetchLikedBy(userIds) {
@@ -131,4 +133,10 @@ function fetchComments(comments) {
     })
 }
 
-document.addEventListener('DOMContentLoaded', fetchProjects)
+document.addEventListener('DOMContentLoaded', fetchProjects) 
+
+document.getElementById('closeDetailsButton').addEventListener('click', function() {
+    document.getElementById('projectDetailContainer').style.display = 'none' // Hide details
+    document.querySelector('.main-container').style.display = 'block' // Show main content again
+})
+// })
