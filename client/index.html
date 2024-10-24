@@ -205,22 +205,39 @@
 </div>
 
 <!-- Project Detail Container (Hidden) -->
-<div id="projectDetailContainer" class="project-detail-container latest-project-detail-hidden">
-    <h2 id="detail-title"></h2>
-    <p id="detail-description"></p>
-    <p id="detail-status"></p>
-    <p id="detail-type"></p>
-    <p id="detail-date-created"></p>
-    <p id="detail-finish-date"></p>
-    
-    <div id="detail-images"></div>
+<div id="projectDetailContainer" class="latest-project-detail-hidden"></div>
+    <div class="project-detail-content">
+        <div class="project-image-container">
+            <div id="detail-images"></div>
+        </div>
+        <div class="project-text-content">
+            <h2 id="detail-title"></h2>
+            <p id="detail-description"></p>
+            <p id="detail-status"></p>
+            <p id="detail-type"></p>
+            <p id="detail-date-created"></p>
+            <p id="detail-finish-date"></p>
+        </div>
 
-    <h3>Liked By:</h3>
-    <div id="likedByContainer"></div>
+        <!-- Moved inside the project-detail-content -->
+        <div class="liked-by-section">
+            <h3>Liked By:</h3>
+            <div id="likedByContainer"></div>
+        </div>
 
-    <h3>Comments:</h3>
-    <div id="commentsContainer"></div>
-    <button id="closeDetailsButton">Close</button>
+        <div class="comments-section">
+            <h3>Comments:</h3>
+            <div id="commentsContainer"></div>
+        </div>
+
+        <div class="new-comment-section">
+            <input type="text" id="newCommentInput" placeholder="Add a comment..." />
+            <button id="submitCommentButton">Submit</button>
+        </div>
+
+        <!-- Close Button -->
+        <button id="closeDetailsButton">Close</button>
+    </div>
 </div>
 
 <footer>

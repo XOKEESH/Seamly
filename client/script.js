@@ -1,4 +1,3 @@
-// document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('createProjectButton').addEventListener('click', function() {
     document.querySelector('.main-container').style.display = 'none' 
     document.getElementById('createProjectDiv').style.display = 'flex' 
@@ -10,6 +9,21 @@ document.getElementById('cancelButton').addEventListener('click', function() {
     document.querySelector('.main-container').style.display = 'block' 
     document.getElementById('createProjectDiv').style.display = 'none' 
 })
+
+let userProfile = null // To hold user profile data
+
+async function fetchUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:3001/users/${userId}`)
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        userProfile = await response.json()
+        console.log('Fetched User Profile:', userProfile)
+    } catch (error) {
+        console.error('Error fetching user profile:', error)
+    }
+}
 
 async function fetchProjects() {
     try {
@@ -66,6 +80,9 @@ async function fetchProjectDetails(projectId) {
         }
         const project = await response.json()
         console.log('Fetched Project:', project)
+        
+        await fetchUserProfile(project.userId)
+        
         displayProjectDetails(project)
     } catch (error) {
         console.error('Error fetching project details:', error)
@@ -91,15 +108,24 @@ function displayProjectDetails(project) {
         detailImages.appendChild(imgElement)
     })
 
+    if (userProfile) {
+        console.log('User Profile:', userProfile.username)
+    }
+
     fetchLikedBy(project.likedBy)
     fetchComments(project.comments)
 
-    // Show the detail container
     const detailContainer = document.getElementById('projectDetailContainer')
-    detailContainer.style.display = 'flex' // Change this line
+    detailContainer.style.display = 'block' // Show the detail container
     document.querySelector('.main-container').style.display = 'none' // Hide main content
     document.querySelector('footer').style.display = 'block' // Show footer
     document.querySelector('.sidebar').style.display = 'flex' // Show sidebar
+
+    // Show sections
+    document.querySelector('.liked-by-section').style.display = 'block'
+    document.querySelector('.comments-section').style.display = 'block'
+    document.querySelector('.new-comment-section').style.display = 'block'
+    document.querySelector('#closeDetailsButton').style.display = 'block' // Show close details button
 }
 
 async function fetchLikedBy(userIds) {
@@ -122,21 +148,68 @@ async function fetchLikedBy(userIds) {
     }
 }
 
-function fetchComments(comments) {
+async function fetchComments(comments) {
     const commentsContainer = document.getElementById('commentsContainer')
     commentsContainer.innerHTML = ''
 
-    comments.forEach(comment => {
-        const commentElement = document.createElement('div')
-        commentElement.textContent = comment.comment 
-        commentsContainer.appendChild(commentElement)
-    })
+    for (const comment of comments) {
+        try {
+            const response = await fetch(`http://localhost:3001/users/${comment.userId}`)
+            const user = await response.json()
+
+            const commentElement = document.createElement('div')
+            commentElement.classList.add('comment')
+
+            const userPic = document.createElement('img')
+            userPic.src = user.profilePicture
+            userPic.alt = user.username
+            userPic.style.width = '40px'
+            userPic.style.borderRadius = '50%'
+
+            const usernameElement = document.createElement('span')
+            usernameElement.textContent = user.username
+            usernameElement.style.fontWeight = 'bold'
+
+            const commentText = document.createElement('p')
+            commentText.textContent = comment.comment
+
+            commentElement.appendChild(userPic)
+            commentElement.appendChild(usernameElement)
+            commentElement.appendChild(commentText)
+
+            commentsContainer.appendChild(commentElement)
+        } catch (error) {
+            console.error('Error fetching user for comment:', error)
+        }
+    }
 }
 
-document.addEventListener('DOMContentLoaded', fetchProjects) 
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProjects()
+    
+    // Hide project detail container on initial load
+    const detailContainer = document.getElementById('projectDetailContainer')
+    detailContainer.style.display = 'none' // Hide detail container initially
+
+    // Hide likedBy, comments, and new comment sections initially
+    document.querySelector('.liked-by-section').style.display = 'none'
+    document.querySelector('.comments-section').style.display = 'none'
+    document.querySelector('.new-comment-section').style.display = 'none'
+    document.querySelector('#closeDetailsButton').style.display = 'none' // Hide close button initially
+})
 
 document.getElementById('closeDetailsButton').addEventListener('click', function() {
-    document.getElementById('projectDetailContainer').style.display = 'none' // Hide details
+    const detailContainer = document.getElementById('projectDetailContainer')
+    detailContainer.style.display = 'none' // Hide the detail container
     document.querySelector('.main-container').style.display = 'block' // Show main content again
+    document.querySelector('footer').style.display = 'block' // Show footer
+    document.querySelector('.sidebar').style.display = 'flex' // Show sidebar
+
+    // Hide sections again
+    document.querySelector('.liked-by-section').style.display = 'none'
+    document.querySelector('.comments-section').style.display = 'none'
+    document.querySelector('.new-comment-section').style.display = 'none'
+    document.querySelector('#closeDetailsButton').style.display = 'none' // Hide close details button
 })
-// })
+
+
