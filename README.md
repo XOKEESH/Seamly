@@ -1,5 +1,5 @@
 # Seamly
-<img src="/client/images/Header IMG.png">
+<img src="/client/images/Header IMG Final.png">
 
 ## Project Concept
 A platform that connects sewing enthusiasts, enabling them to create and manage sewing projects, organize their fabric stash and patterns, join sewing workshops & classes, and engage with the community. 

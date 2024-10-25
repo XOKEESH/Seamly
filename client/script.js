@@ -57,18 +57,10 @@ function renderProjects(projects) {
             const imgElement = imageContainer.querySelector('img')
             imgElement.src = project.images && project.images.length > 0 ? project.images[0] : '/path/to/default/image.jpg'
 
-            // const statusSpan = imageContainer.querySelector('span')
-            // if (statusSpan) {
-            //     const statusClass = `status-span-${project.status.replace(' ', '-').toLowerCase()}`
-            //     statusSpan.className = statusClass
-            //     statusSpan.textContent = project.status
-            //     console.log(`Project ID: ${project._id}, Status: ${project.status}`)
-            // }
-
             const statusSpan = imageContainer.querySelector('span')
                 if (statusSpan) {
-                    statusSpan.className = 'status-span-complete' // Use a hardcoded class
-                    statusSpan.textContent = 'Completed' // Hardcoded status
+                    statusSpan.className = 'status-span-complete'
+                    statusSpan.textContent = 'Completed'
                 }
 
             const titleElement = cardCopy.querySelector('.project-title')
@@ -372,7 +364,7 @@ function renderPatterns(patterns) {
             const titleElement = patternItem.querySelector('.list-title')
             titleElement.textContent = pattern.title || 'Untitled Pattern'
 
-            const brandNameElement = patternItem.querySelector('.username') // Using the same class for brand
+            const brandNameElement = patternItem.querySelector('.username')
             brandNameElement.textContent = pattern.brand || 'Unknown Brand'
         }
     })
