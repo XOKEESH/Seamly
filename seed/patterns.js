@@ -245,6 +245,21 @@ const patterns = [
         patternImg: 'https://cdn11.bigcommerce.com/s-154ncqg253/images/stencil/480x660/products/11180/72221/ME2064_Front__49650.1704462777.jpg?c=1',
         patternLink: 'https://simplicity.com/know-me/me2064',
         patternType: 'Jacket, Vest'
+    },
+    {
+        title: `Celine dress`,
+        brand: 'Vikisews',
+        description: 'A loose-fitting A-line tiered dress with double straps. The dress features casings above and below the bust that are threaded with ties for gathering. Celine is above-ankle length.',
+        skillLevel: 'Intermediate',
+        patternFormat: 'PDF and Paper',
+        ageGroup: 'Adult',
+        bodyType: 'Feminine',
+        fabricTypes: 'Woven',
+        fabricSuggestions: 'We recommend using the following fabrics: dress-weight viscose, silk, artificial silk, cotton, poplin. Medium weight, soft, with good drape, non-stretch or with very little stretch, opaque ',
+        hashtags: ['#vikisews_heidi', '#vikisews'],
+        patternImg: 'https://s3.eu-west-1.amazonaws.com/vikisews.public.media/media/cache/4d/6a/4d6a597a4b03517e9d8784981b9ebd46.jpg',
+        patternLink: 'https://vikisews.com/vykrojki/dresses/celine-dress/',
+        patternType: 'Dress'
     }
 ]
 

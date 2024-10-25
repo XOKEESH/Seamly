@@ -148,7 +148,18 @@ const main = async () => {
             stretch: true,
             sheerness: "Opaque",
             description: "100% hemp woven. Thin, lightweight 6oz. Perfect for comfortable shirts, tops, shirt dresses."
-        }        
+        },
+        {
+            fabricName: "Double Cotton Gauze",
+            imageURL: 'https://www.moodfabrics.com/media/catalog/product/cache/94aa306f46bfa14a0eb90dabf19c296e/3/2/321808.jpg',
+            type: "Woven",
+            colors: "Orange, Brown",
+            quantityInYds: 7,
+            print: "Solid",
+            stretch: false,
+            sheerness: "Opaque",
+            description: "100% cotton. Has a relaxed drape adds to its overall casual feel as it falls into soft silhouettes. The double layers adds to its thickness and durability."
+        }          
     ]
 
     await Fabric.insertMany(fabrics)

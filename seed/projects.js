@@ -93,6 +93,37 @@ const projects = [
             }
         ]
     },
+    {
+        title: "Rustic Summer Vibes",
+        projectType: "Dress",
+        description: "I wanted a go-to dress for those lazy summer days, so I created this flowy piece using the Celine dress pattern by vikiSews. The rust color is just right for the season! Made from 100% cotton, it’s super comfy and perfect for brunches with friends or casual hangouts in the park. I can't wait to wear it!",
+        status: "Completed",
+        dateCreated: new Date(),
+        finishDate: new Date(),
+        userId: '6717bf00fb2edc9df769974b', 
+        fabricIds: ['671b372991fc594a07ababbd'],
+        patternId: '671b359f05875fee4d47b6db',
+        likes: 4,
+        likedBy: ['6717bf00fb2edc9df769974e','6717bf00fb2edc9df769974a', '6717bf00fb2edc9df769974c', '6717bf00fb2edc9df769974d'],
+        images: [
+            'https://s3.eu-west-1.amazonaws.com/vikisews.public.media/media/cache/db/6a/db6a759b7219c69e61089274d6064d0f.jpg',
+            'https://s3.eu-west-1.amazonaws.com/vikisews.public.media/media/cache/61/5e/615eb8c5980747eaaef160fe6b71b6ee.jpg',
+            'https://s3.eu-west-1.amazonaws.com/vikisews.public.media/media/cache/9b/20/9b203a058c622571bb5e628b9b68d721.jpg',
+            'https://s3.eu-west-1.amazonaws.com/vikisews.public.media/media/cache/7b/12/7b1233ff5e9dcb9a7ed35e28fbd1855b.jpg'
+        ],
+        comments: [
+            {
+                userId: '6717bf00fb2edc9df769974a',
+                comment: "I loved seeing the process on your Instagram story! You are so talented!",
+                date: new Date()
+            },
+            {
+                userId: '6717bf00fb2edc9df769974c',
+                comment: "You did it again! - And you always kill it with the mini photoshoots after!",
+                date: new Date()
+            }
+        ]
+    },
 
 ]
 

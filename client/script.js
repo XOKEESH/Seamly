@@ -16,7 +16,7 @@ async function fetchUserProfile(userId) {
     try {
         const response = await fetch(`http://localhost:3001/users/${userId}`)
         if (!response.ok) throw new Error('Network response was not ok')
-        userProfile = await response.json()
+        return await response.json()
     } catch (error) {
         console.error('Error fetching user profile:', error)
     }
@@ -27,6 +27,16 @@ async function fetchProjects() {
         const response = await fetch('http://localhost:3001/projects')
         if (!response.ok) throw new Error('Network response was not ok')
         const projects = await response.json()
+
+        // Fetch user profiles for each project
+        const userProfiles = await Promise.all(projects.map(project => fetchUserProfile(project.userId)))
+        projects.forEach((project, index) => {
+            if (userProfiles[index]) {
+                project.username = userProfiles[index].username
+                project.profilePicture = userProfiles[index].profilePicture
+            }
+        })
+
         renderProjects(projects)
     } catch (error) {
         console.error('Error fetching projects:', error)
@@ -39,7 +49,7 @@ function renderProjects(projects) {
     projects.forEach((project, index) => {
         if (projectItems[index]) {
             const projectItem = projectItems[index]
-            projectItem.dataset.projectId = project._id 
+            projectItem.dataset.projectId = project._id
 
             const imageContainer = projectItem.querySelector('.image-container')
             const cardCopy = projectItem.querySelector('.card-copy')
@@ -47,17 +57,28 @@ function renderProjects(projects) {
             const imgElement = imageContainer.querySelector('img')
             imgElement.src = project.images && project.images.length > 0 ? project.images[0] : '/path/to/default/image.jpg'
 
+            // const statusSpan = imageContainer.querySelector('span')
+            // if (statusSpan) {
+            //     const statusClass = `status-span-${project.status.replace(' ', '-').toLowerCase()}`
+            //     statusSpan.className = statusClass
+            //     statusSpan.textContent = project.status
+            //     console.log(`Project ID: ${project._id}, Status: ${project.status}`)
+            // }
+
             const statusSpan = imageContainer.querySelector('span')
-            if (statusSpan) {
-                const statusClass = `status-span-${project.status.replace(' ', '-').toLowerCase()}`
-                statusSpan.className = statusClass
-            }
+                if (statusSpan) {
+                    statusSpan.className = 'status-span-complete' // Use a hardcoded class
+                    statusSpan.textContent = 'Completed' // Hardcoded status
+                }
 
             const titleElement = cardCopy.querySelector('.project-title')
             titleElement.textContent = project.title
 
             const usernameElement = cardCopy.querySelector('.username')
-            usernameElement.textContent = project.userId 
+            usernameElement.textContent = project.username
+
+            const profilePicElement = cardCopy.querySelector('.profile-picture')
+            profilePicElement.src = project.profilePicture || '/path/to/default/profile.jpg'
 
             projectItem.addEventListener('click', () => {
                 fetchProjectDetails(project._id)
@@ -74,17 +95,17 @@ async function fetchProjectDetails(projectId) {
 
         console.log('Fetched project:', project)
         
-         
-         const userProfile = await fetchUserProfile(project.userId)
-         if (userProfile) {
-             project.username = userProfile.username
-         }
- 
-         if (project.fabricIds && project.fabricIds.length > 0) {
-             await fetchFabricDetails(project.fabricIds[0])
-         } else {
-             console.error('No fabric IDs found for this project')
-         }
+        const userProfile = await fetchUserProfile(project.userId)
+        if (userProfile) {
+            project.username = userProfile.username
+            project.profilePicture = userProfile.profilePicture
+        }
+
+        if (project.fabricIds && project.fabricIds.length > 0) {
+            await fetchFabricDetails(project.fabricIds[0])
+        } else {
+            console.error('No fabric IDs found for this project')
+        }
         
         await fetchPatternDetails(project.patternId)
         displayProjectDetails(project)
@@ -93,6 +114,7 @@ async function fetchProjectDetails(projectId) {
         console.error('Error fetching project details:', error)
     }
 }
+
 
 async function fetchUserProfile(userId) {
     try {
@@ -325,9 +347,40 @@ async function fetchPatternDetails(patternId) {
     }
 }
 
+async function fetchPatterns() {
+    try {
+        const response = await fetch('http://localhost:3001/patterns')
+        if (!response.ok) throw new Error('Network response was not ok')
+        const patterns = await response.json()
+
+        renderPatterns(patterns)
+    } catch (error) {
+        console.error('Error fetching patterns:', error)
+    }
+}
+
+function renderPatterns(patterns) {
+    const patternItems = document.querySelectorAll('.pattern-item')
+
+    patterns.forEach((pattern, index) => {
+        if (patternItems[index]) {
+            const patternItem = patternItems[index]
+
+            const imgElement = patternItem.querySelector('img')
+            imgElement.src = pattern.patternImg || '/path/to/default/image.jpg'
+
+            const titleElement = patternItem.querySelector('.list-title')
+            titleElement.textContent = pattern.title || 'Untitled Pattern'
+
+            const brandNameElement = patternItem.querySelector('.username') // Using the same class for brand
+            brandNameElement.textContent = pattern.brand || 'Unknown Brand'
+        }
+    })
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProjects()
+    fetchPatterns()
     
     const detailContainer = document.getElementById('projectDetailContainer')
     detailContainer.style.display = 'none'

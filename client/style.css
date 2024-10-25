@@ -42,8 +42,14 @@ header h1 {
     overflow-y: auto;
 }
 
+.logo {
+    margin: 20px 0;
+    max-width: 150px;
+}
+
 .sidebar a {
     color: #ffffff;
+    font-size: 18px;
     text-decoration: none;
     margin-bottom: 10px;
     padding: 10px;
@@ -83,6 +89,7 @@ header h1 {
     border: 1px dashed #646464;
     border-radius: 5px;
     padding: 20px;
+    font-size: 16px;
 }
 
 .shortcut-item {
@@ -508,12 +515,17 @@ h3 {
 }
 
 .liked-users-popup li {
+    text-decoration: none;
     padding: 5px 0;
     color: #333;
 }
 
 .liked-users-popup-hidden {
     display: none;
+}
+
+#likedUsersList {
+    list-style-type: none;
 }
 
 .liked-by-section h3 {
