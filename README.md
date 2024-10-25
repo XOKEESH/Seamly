@@ -1,4 +1,3 @@
-# Seamly
 <img src="/client/images/Header IMG Final.png">
 
 ## Project Concept
