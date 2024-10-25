@@ -1,9 +1,10 @@
-#Seamly
+# Seamly
+<img src="/client/images/Header IMG.png">
 
-##Project Concept
+## Project Concept
 A platform that connects sewing enthusiasts, enabling them to create and manage sewing projects, organize their fabric stash and patterns, join sewing workshops & classes, and engage with the community. 
 
-##Project Features
+## Project Features
 
 - Users can log details of their fabric stash, including type, color, quantity, and location.
 - Users can browse, upload, and share sewing patterns, with filters for skill level, style, and type.
@@ -14,11 +15,11 @@ A platform that connects sewing enthusiasts, enabling them to create and manage 
   - Collections can be shared with the community or kept private, allowing users to showcase their work or keep it personal.
 - Users can register for workshops & classes on the platform.
 
-##ERD
+## ERD
 
 <img src="/client/images/Seamly.drawio copy.png">
 
-##User Stories
+## User Stories
 
 Fabric Stash Management
 - I want to categorize my fabric stash by type, color, and quantity, so that I can quickly find what I need for my next project without feeling overwhelmed by my collection.
@@ -38,3 +39,4 @@ Project Organization with Collections
 Workshop Registration
 - I want to view upcoming workshops and classes sorted by skill level and topic, so that I can find the right opportunities to enhance my skills and expand my sewing knowledge.
 
+<img src="/client/images/Footer IMG.png">
