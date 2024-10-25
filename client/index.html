@@ -208,34 +208,45 @@
 <div id="projectDetailContainer" class="latest-project-detail-hidden">
     <div class="project-detail-content">
         <div class="top-detail-content">
-        <div class="project-image-container">
-            <div id="detail-images"></div>
+            <div class="project-image-container">
+                <div id="detail-images" class="carousel">
+                <div class="carousel-inner" id="carouselInner"></div>
+                    <button class="carousel-control-prev" id="prevButton">❮</button>
+                    <button class="carousel-control-next" id="nextButton">❯</button>
+                </div>
             </div>
-        <div class="project-text-content">
-            <h2 id="detail-title"></h2>
-            <p id="detail-description"></p>
-            <p id="detail-status"></p>
-            <p id="detail-type"></p>
-            <p id="detail-date-created"></p>
-            <p id="detail-finish-date"></p>
+            <div class="project-text-content">
+                <h2 id="detail-title"></h2>
+                <p id="detail-description"></p>
+                <p id="detail-status"></p>
+                <p id="detail-type"></p>
+                <p id="detail-date-created"></p>
+                <p id="detail-finish-date"></p>
             </div>
-
-        <div class="liked-by-section">
-            <h3>Liked By:</h3>
-            <div id="likedByContainer"></div>
+            <div class="liked-by-section">
+                <div class="likes-container">
+                    <span class="heart-icon">❤️</span>
+                    <span id="likeCount"></span> Likes
+                </div>
+                <button id="likeButton">Like</button>
+                <div id="likedUsersPopup" class="liked-users-popup-hidden">
+                    <ul id="likedUsersList"></ul>
+                </div>
+            </div>
         </div>
-        </div>
+        
         <div class="comments-section">
             <h3>Comments:</h3>
             <div id="commentsContainer"></div>
         </div>
 
         <div class="new-comment-section">
-            <input type="text" id="newCommentInput" placeholder="Add a comment..." />
+            <input type="text" id="newCommentInput" placeholder="Share your thoughts."/>
             <div class="PDbutton-container">
-            <button id="submitCommentButton">Submit</button>
-            <button id="closeDetailsButton">Close</button>
-        </div>
+                <button id="submitCommentButton">Comment</button>
+                <button id="closeDetailsButton">Close</button>
+            </div>
+        </div> 
     </div>
 </div>
 

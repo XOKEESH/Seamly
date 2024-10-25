@@ -10,16 +10,13 @@ document.getElementById('cancelButton').addEventListener('click', function() {
     document.getElementById('createProjectDiv').style.display = 'none' 
 })
 
-let userProfile = null // To hold user profile data
+let userProfile = null 
 
 async function fetchUserProfile(userId) {
     try {
         const response = await fetch(`http://localhost:3001/users/${userId}`)
-        if (!response.ok) {
-            throw new Error('Network response was not ok')
-        }
+        if (!response.ok) throw new Error('Network response was not ok')
         userProfile = await response.json()
-        console.log('Fetched User Profile:', userProfile)
     } catch (error) {
         console.error('Error fetching user profile:', error)
     }
@@ -28,11 +25,8 @@ async function fetchUserProfile(userId) {
 async function fetchProjects() {
     try {
         const response = await fetch('http://localhost:3001/projects')
-        if (!response.ok) {
-            throw new Error('Network response was not ok')
-        }
+        if (!response.ok) throw new Error('Network response was not ok')
         const projects = await response.json()
-        console.log('Fetched Projects:', projects) 
         renderProjects(projects)
     } catch (error) {
         console.error('Error fetching projects:', error)
@@ -75,23 +69,19 @@ function renderProjects(projects) {
 async function fetchProjectDetails(projectId) {
     try {
         const response = await fetch(`http://localhost:3001/projects/${projectId}`)
-        if (!response.ok) {
-            throw new Error('Network response was not ok')
-        }
+        if (!response.ok) throw new Error('Network response was not ok')
         const project = await response.json()
-        console.log('Fetched Project:', project)
         
         await fetchUserProfile(project.userId)
         
         displayProjectDetails(project)
+        fetchLikes(projectId)
     } catch (error) {
         console.error('Error fetching project details:', error)
     }
 }
 
 function displayProjectDetails(project) {
-    console.log('Displaying project details:', project)
-
     document.getElementById('detail-title').textContent = project.title
     document.getElementById('detail-description').textContent = project.description
     document.getElementById('detail-status').textContent = `Status: ${project.status}`
@@ -99,49 +89,119 @@ function displayProjectDetails(project) {
     document.getElementById('detail-date-created').textContent = `Created on: ${new Date(project.dateCreated).toLocaleDateString()}`
     document.getElementById('detail-finish-date').textContent = project.finishDate ? `Finish Date: ${new Date(project.finishDate).toLocaleDateString()}` : 'Finish Date: Not specified'
 
-    const detailImages = document.getElementById('detail-images')
-    detailImages.innerHTML = '' 
-    project.images.forEach(img => {
+    const detailImages = document.getElementById('carouselInner')
+    detailImages.innerHTML = ''
+    
+    project.images.forEach((img, index) => {
+        const carouselItem = document.createElement('div')
+        carouselItem.classList.add('carousel-item')
+        if (index === 0) carouselItem.classList.add('active')
+    
         const imgElement = document.createElement('img')
         imgElement.src = img
-        imgElement.style.width = '100%' 
-        detailImages.appendChild(imgElement)
+        imgElement.alt = `Project Image ${index + 1}`
+        imgElement.style.width = '100%'
+    
+        carouselItem.appendChild(imgElement)
+        detailImages.appendChild(carouselItem)
     })
-
-    if (userProfile) {
-        console.log('User Profile:', userProfile.username)
+    
+    let currentIndex = 0
+    updateCarousel()
+    
+    const prevButton = document.getElementById('prevButton')
+    const nextButton = document.getElementById('nextButton')
+    
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : project.images.length - 1
+        updateCarousel()
+    })
+    
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex < project.images.length - 1) ? currentIndex + 1 : 0
+        updateCarousel()
+    })
+    
+    function updateCarousel() {
+        const items = document.querySelectorAll('.carousel-item')
+        items.forEach((item, index) => {
+            item.style.display = index === currentIndex ? 'block' : 'none'
+        })
     }
-
+    
     fetchLikedBy(project.likedBy)
     fetchComments(project.comments)
 
     const detailContainer = document.getElementById('projectDetailContainer')
-    detailContainer.style.display = 'block' // Show the detail container
-    document.querySelector('.main-container').style.display = 'none' // Hide main content
-    document.querySelector('footer').style.display = 'block' // Show footer
-    document.querySelector('.sidebar').style.display = 'flex' // Show sidebar
+    detailContainer.style.display = 'block'
+    document.querySelector('.main-container').style.display = 'none'
+    document.querySelector('footer').style.display = 'block'
+    document.querySelector('.sidebar').style.display = 'flex'
 
-    // Show sections
     document.querySelector('.liked-by-section').style.display = 'block'
     document.querySelector('.comments-section').style.display = 'block'
     document.querySelector('.new-comment-section').style.display = 'block'
-    document.querySelector('#closeDetailsButton').style.display = 'block' // Show close details button
+    document.querySelector('#closeDetailsButton').style.display = 'block'
 }
 
+async function fetchLikes(projectId) {
+    try {
+        const response = await fetch(`http://localhost:3001/projects/${projectId}`)
+        if (!response.ok) throw new Error('Network response was not ok')
+        const project = await response.json()
+        document.getElementById('likeCount').textContent = project.likes
+        fetchLikedBy(project.likedBy)
+    } catch (error) {
+        console.error('Error fetching likes:', error)
+    }
+}
+
+async function handleLike(projectId) {
+    const userId = userProfile._id 
+    try {
+        const response = await fetch(`http://localhost:3001/projects/${projectId}/like`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId }),
+        })
+        if (!response.ok) throw new Error('Network response was not ok')
+        fetchLikes(projectId)
+    } catch (error) {
+        console.error('Error liking project:', error)
+    }
+}
+
+document.getElementById('likeButton').addEventListener('click', function() {
+    const projectId = document.querySelector('.project-detail-content').dataset.projectId
+    handleLike(projectId)
+})
+
+document.querySelector('.likes-container').addEventListener('click', function() {
+    const popup = document.getElementById('likedUsersPopup')
+    popup.classList.toggle('liked-users-popup-hidden')
+})
+
 async function fetchLikedBy(userIds) {
-    const likedByContainer = document.getElementById('likedByContainer')
-    likedByContainer.innerHTML = ''
-    
-    for (const userId of userIds) {
+    const likedUsersList = document.getElementById('likedUsersList')
+    likedUsersList.innerHTML = ''
+
+    const uniqueUserIds = new Set(userIds)
+    const addedUsernames = new Set()
+
+    for (const userId of uniqueUserIds) {
         try {
             const response = await fetch(`http://localhost:3001/users/${userId}`)
-            if (!response.ok) {
-                throw new Error('Network response was not ok')
-            }
+            if (!response.ok) throw new Error('Network response was not ok')
             const user = await response.json()
-            const userElement = document.createElement('div')
-            userElement.textContent = user.username
-            likedByContainer.appendChild(userElement)
+
+            if (!addedUsernames.has(user.username)) {
+                const userElement = document.createElement('li')
+                userElement.textContent = user.username
+                likedUsersList.appendChild(userElement)
+                addedUsernames.add(user.username)
+            }
         } catch (error) {
             console.error('Error fetching liked by user:', error)
         }
@@ -187,29 +247,24 @@ async function fetchComments(comments) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchProjects()
     
-    // Hide project detail container on initial load
     const detailContainer = document.getElementById('projectDetailContainer')
-    detailContainer.style.display = 'none' // Hide detail container initially
+    detailContainer.style.display = 'none'
 
-    // Hide likedBy, comments, and new comment sections initially
     document.querySelector('.liked-by-section').style.display = 'none'
     document.querySelector('.comments-section').style.display = 'none'
     document.querySelector('.new-comment-section').style.display = 'none'
-    document.querySelector('#closeDetailsButton').style.display = 'none' // Hide close button initially
+    document.querySelector('#closeDetailsButton').style.display = 'none'
 })
 
 document.getElementById('closeDetailsButton').addEventListener('click', function() {
     const detailContainer = document.getElementById('projectDetailContainer')
-    detailContainer.style.display = 'none' // Hide the detail container
-    document.querySelector('.main-container').style.display = 'block' // Show main content again
-    document.querySelector('footer').style.display = 'block' // Show footer
-    document.querySelector('.sidebar').style.display = 'flex' // Show sidebar
+    detailContainer.style.display = 'none'
+    document.querySelector('.main-container').style.display = 'block'
+    document.querySelector('footer').style.display = 'block'
+    document.querySelector('.sidebar').style.display = 'flex'
 
-    // Hide sections again
     document.querySelector('.liked-by-section').style.display = 'none'
     document.querySelector('.comments-section').style.display = 'none'
     document.querySelector('.new-comment-section').style.display = 'none'
-    document.querySelector('#closeDetailsButton').style.display = 'none' // Hide close details button
+    document.querySelector('#closeDetailsButton').style.display = 'none'
 })
-
-

@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 header {
     background-color: #0a0f26;
     color: #ffffff;
@@ -20,6 +21,7 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+
 header h1 {
     margin: 0;
 }
@@ -76,14 +78,7 @@ header h1 {
     display: block;
 }
 
-#shortcut-button {
-    background-color: #f5f5f5;
-    border: 1px dashed #646464;
-    border-radius: 5px;
-    padding: 20px;
-}
-
-#createProjectButton {
+#shortcut-button, #createProjectButton {
     background-color: #f5f5f5;
     border: 1px dashed #646464;
     border-radius: 5px;
@@ -138,24 +133,22 @@ header h1 {
     width: 100%;
 }
 
-.status-span-complete {
+.status-span-complete, .status-span-inprogress {
     position: absolute;      
     top: 10px;
     right: 10px;
-    background-color: rgba(150, 94, 213, 0.7);
-    color: white;
     padding: 5px 10px;
     border-radius: 15px;
 }
 
+.status-span-complete {
+    background-color: rgba(150, 94, 213, 0.7);
+    color: white;
+}
+
 .status-span-inprogress {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background-color: rgba(203, 94, 213, 0.7);
     color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
 }
 
 /* Pattern Lists Section */
@@ -276,15 +269,15 @@ header h1 {
     overflow-y: auto;
     padding: 20px;
     width: calc(100% - 40px); 
-    max-width: 600px; /* Set a max width for larger screens */
-    margin: 0 auto; /* Center the form on the screen */
+    max-width: 600px; 
+    margin: 0 auto; 
     min-height: 95vh;
 }
 
 .create-project-form form {
     display: flex;
     flex-direction: column;
-    width: 100%; /* Make form full width */
+    width: 100%; 
 }
 
 .create-project-form input,
@@ -298,19 +291,19 @@ select {
 
 .CPbutton-group {
     display: flex;
-    justify-content: center; /* Center the buttons */
+    justify-content: center; 
     gap: 10px;
-    margin-bottom: 20px; /* Add some space below the button group */
+    margin-bottom: 20px; 
 }
 
 .CPbutton {
     background-color: #f5f5f5; 
     border: 1px dashed #646464; 
     border-radius: 5px; 
-    padding: 10px 20px; /* Adjusted padding */
+    padding: 10px 20px; 
     cursor: pointer; 
-    flex: 1; /* Allow buttons to grow and fill the space equally */
-    min-width: 120px; /* Set a minimum width for buttons */
+    flex: 1; 
+    min-width: 120px; 
 }
 
 #cancelButton {
@@ -329,16 +322,16 @@ select {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 20px; /* Space between sections */
-    top: 15px; /* Offset from top */
-    left: 250px; /* Offset from left (considering sidebar) */
-    right: 20px; /* Space on the right */
-    bottom: 50px; /* Offset from bottom */
+    gap: 20px; 
+    top: 15px; 
+    left: 250px; 
+    right: 20px; 
+    bottom: 50px; 
     padding: 20px;
-    background-color: #ffffff; /* Background color */
-    border-radius: 12px; /* Rounded corners */
-    z-index: 20; /* Layering */
-    max-width: 900px; /* Max width */
+    background-color: #ffffff; 
+    border-radius: 12px; 
+    z-index: 20; 
+    max-width: 900px; 
     margin: 70px auto;
     min-height: 95vh;
 }
@@ -353,26 +346,12 @@ select {
 }
 
 .project-image-container {
-    flex-shrink: 0; /* Prevent the image from shrinking */
-    max-width: 40%; /* Optional: limit the max width of the image */
+    flex-shrink: 0; 
+    max-width: 40%; 
     display: flex;
-    justify-content: flex-start; /* Align image to the left */
-    align-items: center; /* Center image vertically */
-}
-
-/* Image Container */
-/* .project-image-container {
-    display: flex;
+    justify-content: flex-start; 
     align-items: center; 
-    justify-content: center;
-} */
-
-/* .project-image-container img {
-    max-width: 100%;
-    height: auto; 
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-} */
+}
 
 .project-image-container img {
     max-width: 100%;
@@ -381,109 +360,194 @@ select {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Text Content */
-/* .project-text-content {
-    flex: 1;
-    display: flex; 
-    flex-direction: column; 
-} */
+.carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-inner img {
+    max-width: 100%;
+    display: block;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
 
 .project-text-content {
-    flex: 1; /* Allow text content to take remaining space */
+    flex: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align text to the top */
-    align-items: flex-start; /* Align text content to the left within its space */
+    justify-content: flex-start; 
+    align-items: flex-start; 
 }
 
 .project-text-content h2 {
-    font-size: 28px; /* Title size */
-    color: #333; /* Dark text color */
+    font-size: 28px; 
+    color: #333; 
     font-weight: 600;
-    margin-bottom: 10px; /* Space below title */
+    margin-bottom: 10px; 
 }
 
 .project-text-content p {
     margin-bottom: 8px;
     font-size: 16px;
-    color: #666; /* Subtle text color */
+    color: #666; 
     line-height: 1.6;
 }
 
 /* Section Headings */
 h3 {
-    margin: 20px 0 10px; /* Space around h3 */
-    font-size: 20px; /* Heading size */
-    color: #555; /* Color */
+    margin: 20px 0 10px; 
+    font-size: 20px; 
+    color: #555; 
 }
 
 /* Common Section Styles */ 
 .new-comment-section {
-    background-color: #f9f9f9; /* Light background */
-    padding: 15px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    margin-bottom: 10px; /* Space below */
+    background-color: #f9f9f9; 
+    padding: 15px; 
+    border-radius: 8px; 
+    margin-bottom: 10px; 
 }
 
 .liked-by-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 20px;
-    background-color: #f9f9f9; /* Light background */
-    padding: 15px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-  }
+    background-color: #f9f9f9; 
+    padding: 15px; 
+    border-radius: 8px; 
+}
 
-  .liked-by-section h3 {
+.likes-container {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.heart-icon {
+    font-size: 20px;
+    color: red;
+    margin-right: 5px;
+}
+
+#likeButton {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* DropDown Popup */
+.liked-users-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+
+.liked-users-popup ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.liked-users-popup li {
+    padding: 5px 0;
+    color: #333;
+}
+
+.liked-users-popup-hidden {
+    display: none;
+}
+
+.liked-by-section h3 {
     font-size: 18px;
     color: #444;
     font-weight: 500;
     margin-bottom: 10px;
-  }
+}
 
-  #likedByContainer {
+#likedByContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-  }
-  
-  #likedByContainer div {
+}
+
+#likedByContainer div {
     background-color: #f0f0f0;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 14px;
     color: #555;
-  }
+}
 
-  .comments-section {
+.comments-section {
     margin-top: 20px;
     width: 100%;
     background-color: #fafafa;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  }
+}
 
-  .comments-section h3 {
+.comments-section h3 {
     font-size: 18px;
     color: #444;
     font-weight: 500;
     margin-bottom: 10px;
-  }
+}
 
 /* Input and Button Styles */
 .new-comment-section {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between input and button */
     margin-top: 20px;
-    margin-bottom: 60px;
+    width: 100%;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 10px;
 }
 
 #newCommentInput {
-    flex: 1; /* Input takes available space */
-    padding: 10px 60px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    border: 1px solid #ddd; /* Border */
+    flex: 1; 
+    padding: 30px 0; 
+    border-radius: 8px; 
+    border: 1px solid #ddd; 
     font-size: 14px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #submitCommentButton, #closeDetailsButton {
@@ -495,18 +559,18 @@ h3 {
     cursor: pointer;
     flex: 1;
     min-width: 120px;
-  }
+}
 
-  #closeDetailsButton {
+#closeDetailsButton {
     background-color: #ff6b6b;
     color: white;
-  }
+}
 
-  .PDbutton-container {
+.PDbutton-container {
     display: flex;
     gap: 10px;
-  }
- 
+}
+
 /* Footer */
 footer {
     background-color: #0a0f26;
@@ -575,3 +639,4 @@ a {
         bottom: 0;
     }
 }
+
