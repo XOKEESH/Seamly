@@ -74,13 +74,17 @@ async function fetchProjectDetails(projectId) {
 
         console.log('Fetched project:', project)
         
-        await fetchUserProfile(project.userId)
-        
-        if (project.fabricIds && project.fabricIds.length > 0) {
-            await fetchFabricDetails(project.fabricIds[0])
-        } else {
-            console.error('No fabric IDs found for this project')
-        }
+         
+         const userProfile = await fetchUserProfile(project.userId)
+         if (userProfile) {
+             project.username = userProfile.username
+         }
+ 
+         if (project.fabricIds && project.fabricIds.length > 0) {
+             await fetchFabricDetails(project.fabricIds[0])
+         } else {
+             console.error('No fabric IDs found for this project')
+         }
         
         await fetchPatternDetails(project.patternId)
         displayProjectDetails(project)
@@ -90,8 +94,19 @@ async function fetchProjectDetails(projectId) {
     }
 }
 
+async function fetchUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:3001/users/${userId}`)
+        if (!response.ok) throw new Error(`Failed to fetch user profile: ${response.statusText}`)
+        return await response.json()
+    } catch (error) {
+        console.error('Error fetching user profile:', error)
+    }
+}
+
 function displayProjectDetails(project) {
     document.getElementById('detail-title').textContent = project.title
+    document.getElementById('detail-username').textContent = project.username
     document.getElementById('detail-description').textContent = project.description
     document.getElementById('detail-status').textContent = `Status: ${project.status}`
     document.getElementById('detail-type').textContent = `Type: ${project.projectType}`
@@ -232,7 +247,7 @@ async function fetchComments(comments) {
             const userPic = document.createElement('img')
             userPic.src = user.profilePicture
             userPic.alt = user.username
-            userPic.style.width = '40px'
+            userPic.style.width = '60px'
             userPic.style.borderRadius = '50%'
 
             const usernameElement = document.createElement('span')
@@ -241,6 +256,7 @@ async function fetchComments(comments) {
 
             const commentText = document.createElement('p')
             commentText.textContent = comment.comment
+            commentText.classList.add('comment-text')
 
             commentElement.appendChild(userPic)
             commentElement.appendChild(usernameElement)
@@ -267,8 +283,12 @@ async function fetchFabricDetails(fabricId) {
 
         if (fabric) {
             const fabricImageElement = document.getElementById('MCfabric-image')
+            const additionalFabricImageElement = document.getElementById('MCfabric-additional-image')
             if (fabricImageElement && fabric.imageURL) {
                 fabricImageElement.src = fabric.imageURL
+                if (additionalFabricImageElement) {
+                    additionalFabricImageElement.src = fabric.imageURL
+                }
             }
             document.getElementById('MCfabric-name').textContent = fabric.fabricName || 'Unknown Fabric'
             document.getElementById('MCfabric-type').textContent = `Type: ${fabric.type || 'N/A'}`
