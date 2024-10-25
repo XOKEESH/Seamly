@@ -69,11 +69,20 @@ function renderProjects(projects) {
 async function fetchProjectDetails(projectId) {
     try {
         const response = await fetch(`http://localhost:3001/projects/${projectId}`)
-        if (!response.ok) throw new Error('Network response was not ok')
+        if (!response.ok) throw new Error(`Failed to fetch project details: ${response.statusText}`)
         const project = await response.json()
+
+        console.log('Fetched project:', project)
         
         await fetchUserProfile(project.userId)
         
+        if (project.fabricIds && project.fabricIds.length > 0) {
+            await fetchFabricDetails(project.fabricIds[0])
+        } else {
+            console.error('No fabric IDs found for this project')
+        }
+        
+        await fetchPatternDetails(project.patternId)
         displayProjectDetails(project)
         fetchLikes(projectId)
     } catch (error) {
@@ -243,6 +252,59 @@ async function fetchComments(comments) {
         }
     }
 }
+
+async function fetchFabricDetails(fabricId) {
+    if (!fabricId) {
+        console.error('No fabric ID provided')
+        return
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3001/fabrics/${fabricId}`)
+        if (!response.ok) throw new Error(`Failed to fetch fabric with ID ${fabricId}: ${response.status}`)
+        
+        const fabric = await response.json()
+
+        if (fabric) {
+            const fabricImageElement = document.getElementById('MCfabric-image')
+            if (fabricImageElement && fabric.imageURL) {
+                fabricImageElement.src = fabric.imageURL
+            }
+            document.getElementById('MCfabric-name').textContent = fabric.fabricName || 'Unknown Fabric'
+            document.getElementById('MCfabric-type').textContent = `Type: ${fabric.type || 'N/A'}`
+            document.getElementById('MCfabric-stretch').textContent = `Stretch: ${fabric.stretch ? 'Yes' : 'No'}`
+            document.getElementById('MCfabric-sheerness').textContent = `Sheerness: ${fabric.sheerness || 'N/A'}`
+            document.getElementById('MCfabric-color').textContent = `Color Family: ${fabric.colors || 'N/A'}`
+            document.getElementById('MCfabric-decsription').textContent = `Description: ${fabric.description}`
+
+        } else {
+            throw new Error(`Invalid fabric data for ID ${fabricId}`)
+        }
+    } catch (error) {
+        console.error('Error fetching fabric details:', error)
+    }
+}
+
+async function fetchPatternDetails(patternId) {
+    try {
+        const response = await fetch(`http://localhost:3001/patterns/${patternId}`)
+        if (!response.ok) throw new Error(`Failed to fetch pattern with ID ${patternId}: ${response.status}`)
+        const pattern = await response.json()
+
+        if (pattern && pattern.patternImg) {
+            const patternImageElement = document.getElementById('MCpattern-image')
+            if (patternImageElement) patternImageElement.src = pattern.patternImg
+            document.getElementById('MCpattern-title').textContent = pattern.title || 'Unknown Pattern'
+            document.getElementById('MCpattern-brand').textContent = `By: ${pattern.brand || 'N/A'}`
+            document.getElementById('MCpattern-skill-level').textContent = `Skill Level: ${pattern.skillLevel || 'N/A'}`
+        } else {
+            throw new Error(`Invalid pattern data for ID ${patternId}`)
+        }
+    } catch (error) {
+        console.error('Error fetching pattern details:', error)
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProjects()

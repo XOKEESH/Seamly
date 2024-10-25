@@ -19,7 +19,7 @@ const getFabricsById = async (req,res) => {
         }
         return res.status(404).send('Fabric with that ID not found.')
     } catch (e) {
-        return res.ststus(500).send(e.message)
+        return res.status(500).send(e.message)
     }
 }
 
